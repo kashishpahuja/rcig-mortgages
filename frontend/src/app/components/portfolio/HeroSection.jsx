@@ -1,6 +1,5 @@
 // components/HeroSection.jsx
 'use client';
-
 import React from 'react';
 import FadeIn from './FadeIn';
 import Magnet from './Magnet';
@@ -8,7 +7,7 @@ import ContactButton from './ContactButton';
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen w-full flex flex-col justify-between overflow-x-clip px-6 md:px-10 pt-6 md:pt-8 pb-7 sm:pb-8 md:pb-10 bg-[#092b6686] text-white">
+    <section className="relative h-[60vh] md:h-[70vh] lg:h-screen w-full flex flex-col justify-between overflow-x-clip px-6 md:px-10 pt-6 md:pt-8 pb-7 sm:pb-8 md:pb-10 bg-[#092b6686] text-white">
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
         style={{ backgroundImage: "url('/Images/bg.webp')" }}
@@ -82,7 +81,7 @@ export default function HeroSection() {
 
 
       {/* Candidate Portrait */}
-      <div className="absolute left-1/2 -translate-x-1/2 z-10 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 pointer-events-none">
+      <div className="absolute left-1/2 -translate-x-1/2 z-10 top-auto -translate-y-1/2 md:translate-y-0 bottom-0 pointer-events-none">
 
         <FadeIn delay={0.6} y={30}>
 
@@ -93,13 +92,15 @@ export default function HeroSection() {
               {/* Subtle gold glow behind portrait */}
               <div className="absolute inset-x-[-30px] bottom-0 h-[85%] bg-[#D4AF37]/10 blur-[70px] rounded-full" />
 
+      <div className='border border-amber-50 '>
+      
               <img
                 src="/Images/manjit1.webp"
                 alt="Manjit Bhondhi"
                 className="
                   relative
-                  w-[280px]
-                  sm:w-[360px]
+                 
+                  w-[360px]
                   md:w-[440px]
                   lg:w-[620px]
                   object-cover
@@ -107,7 +108,7 @@ export default function HeroSection() {
                   drop-shadow-[0_15px_35px_rgba(0,0,0,0.45)]
                 "
               />
-
+</div>
             </div>
 
 
@@ -139,9 +140,9 @@ export default function HeroSection() {
                 leading-none
                 whitespace-nowrap
                 w-full
-                text-[12vw]
-                sm:text-[13vw]
-                md:text-[14vw]
+                text-[11vw]
+                sm:text-[11vw]
+                md:text-[11vw]
                 lg:text-[11vw]
                 mt-6
                 sm:mt-4
@@ -174,7 +175,7 @@ export default function HeroSection() {
 
 
         {/* Bottom Bar */}
-        <div className="flex justify-between items-end w-full mt-4">
+        <div className="md:flex justify-between items-end w-full mt-4">
 
           {/* Campaign Introduction */}
           <FadeIn delay={0.35} y={20}>
@@ -225,7 +226,7 @@ export default function HeroSection() {
           {/* Contact Button */}
           <FadeIn delay={0.5} y={20}>
 
-            <div className="campaign-contact">
+            <div className="campaign-contact mt-6 md:mt-0">
 
               <ContactButton />
 
