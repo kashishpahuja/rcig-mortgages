@@ -33,55 +33,15 @@ export default function HeroSection() {
         delay={0}
         y={-20}
         as="nav"
-        className="relative flex items-center justify-between z-20"
+        className="relative hidden lg:flex items-center justify-between z-20"
       >
 
-        {/* {['About', 'Community', 'Vision', 'Contact'].map((item, index) => (
-
-          <a
-            key={item}
-            href={`#${item.toLowerCase()}`}
-            className="
-              relative
-              text-[#F5F5F5]
-              font-medium
-              uppercase
-              tracking-[0.15em]
-              text-sm
-              md:text-lg
-              lg:text-[1.2rem]
-              transition-all
-              duration-300
-              hover:text-[#D4AF37]
-              group
-            "
-          >
-
-            {item}
-
-            <span
-              className="
-                absolute
-                -bottom-2
-                left-0
-                h-[2px]
-                w-0
-                bg-[#D4AF37]
-                transition-all
-                duration-300
-                group-hover:w-full
-              "
-            />
-
-          </a>
-
-        ))} */}
-
+    
       </FadeIn>
 
 
       {/* Candidate Portrait */}
-      <div className="absolute left-1/2 -translate-x-1/2 z-10 top-auto -translate-y-1/2 md:translate-y-0 bottom-0 pointer-events-none">
+      <div className="absolute left-1/2 -translate-x-1/4 md:-translate-1/2 z-10 top-auto -translate-y-0 md:translate-y-0 bottom-0 pointer-events-none">
 
         <FadeIn delay={0.6} y={30}>
 
@@ -92,7 +52,7 @@ export default function HeroSection() {
               {/* Subtle gold glow behind portrait */}
               <div className="absolute inset-x-[-30px] bottom-0 h-[85%] bg-[#D4AF37]/10 blur-[70px] rounded-full" />
 
-      <div className='border border-amber-50 '>
+      <div className=''>
       
               <img
                 src="/Images/manjit1.webp"

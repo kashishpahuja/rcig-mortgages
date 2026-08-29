@@ -1,18 +1,31 @@
 // components/ContactButton.jsx
+'use client';
+
 import React from 'react';
 
 export default function ContactButton() {
+  const phoneNumber = '14169853771';
+
+  const message = encodeURIComponent(
+    'Hello Manjit Bhondhi, I would like to get in touch regarding your campaign for Mayor of Caledon.'
+  );
+
   return (
-    <button
-      className="rounded-full uppercase tracking-widest text-white font-medium px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base transition-transform active:scale-95 cursor-pointer shadow-lg"
+    <a
+      href={`https://wa.me/${phoneNumber}?text=${message}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="rounded-full uppercase tracking-widest text-white font-medium px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base transition-transform active:scale-95 cursor-pointer shadow-lg inline-flex items-center justify-center"
       style={{
-        background: 'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
-        boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25), inset 4px 4px 12px #7721B1',
+        background:
+          'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
+        boxShadow:
+          '0px 4px 4px rgba(181, 1, 167, 0.25), inset 4px 4px 12px #7721B1',
         outline: '2px solid white',
-        outlineOffset: '-3px'
+        outlineOffset: '-3px',
       }}
     >
       Contact Me
-    </button>
+    </a>
   );
 }
