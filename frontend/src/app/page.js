@@ -3,7 +3,7 @@
 
 import React from 'react';
 import HeroSection from './components/portfolio/HeroSection';
-// import MarqueeSection from './components/portfolio/MarqueeSection';
+import MarqueeSection from './components/portfolio/MarqueeSection';
 import AboutSection from './components/portfolio/AboutSection';
 import ServicesSection from './components/portfolio/ServicesSection';
 import ProjectsSection from './components/portfolio/ProjectsSection';
@@ -34,8 +34,8 @@ export default function PortfolioPage() {
 
       <div className="w-full overflow-x-clip bg-[#0C0C0C]">
         <HeroSection />
-        {/* <MarqueeSection /> */}
         <AboutSection />
+        <MarqueeSection />
         <ServicesSection />
         <ProjectsSection />
         <Footer/>

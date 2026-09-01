@@ -4,33 +4,31 @@
 import React, { useEffect, useState } from 'react';
 
 const gifs = [
-  "https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif",
-  "https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif",
-  "https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif",
-  "https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif",
-  "https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif",
-  "https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif",
-  "https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif",
-  "https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif",
-  "https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif",
-  "https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif",
-  "https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif",
-  "https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif",
-  "https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif",
-  "https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif",
-  "https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif",
-  "https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif",
-  "https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif",
-  "https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif",
-  "https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif",
-  "https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif",
-  "https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif"
+  "/Images/5.webp",
+  "/Images/1.webp",
+  "/Images/2.webp",
+  "/Images/3.webp",
+  "/Images/4.webp",
+  "/Images/6.webp",
+  "/Images/7.webp",
+  "/Images/8.webp",
+  "/Images/9.webp",
+  "/Images/10.webp",
 ];
 
 export default function MarqueeSection() {
   const [offset, setOffset] = useState(0);
+  const [row1Gifs, setRow1Gifs] = useState([]);
+  const [row2Gifs, setRow2Gifs] = useState([]);
 
   useEffect(() => {
+    // Shuffle all 10 images
+    const shuffled = [...gifs].sort(() => Math.random() - 0.5);
+
+    // Split into two rows - 5 unique images each
+    setRow1Gifs(shuffled.slice(0, 5));
+    setRow2Gifs(shuffled.slice(5, 10));
+
     const handleScroll = () => {
       const section = document.getElementById('marquee-section');
 
@@ -47,54 +45,37 @@ export default function MarqueeSection() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
 
+    // Initial position
+    handleScroll();
+
     return () =>
       window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const row1Gifs = [
-    ...gifs.slice(0, 11),
-    ...gifs.slice(0, 11),
-    ...gifs.slice(0, 11)
-  ];
-
-  const row2Gifs = [
-    ...gifs.slice(11),
-    ...gifs.slice(11),
-    ...gifs.slice(11)
-  ];
+  // Duplicate each row for continuous marquee
+  const row1Loop = [...row1Gifs, ...row1Gifs, ...row1Gifs];
+  const row2Loop = [...row2Gifs, ...row2Gifs, ...row2Gifs];
 
   return (
     <section
       id="marquee-section"
       className="
         relative
-        bg-[#092B66]
         pt-24
         sm:pt-32
         md:pt-40
+        bg-[#092b666c]
         pb-10
         overflow-x-clip
       "
     >
 
-      {/* Subtle campaign background */}
-      <div className="absolute inset-0 pointer-events-none">
-
-        <div className="absolute inset-0 bg-gradient-to-b from-[#092B66] via-[#0A316F] to-[#061F4B]" />
-
-        {/* Very subtle gold glow */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] rounded-full bg-[#D4AF37]/5 blur-[120px]" />
-
-      </div>
-
-
       {/* Gold top accent */}
       <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#D4AF37]" />
 
-
       <div className="relative flex flex-col gap-3">
 
-        {/* Row 1 - Moves Right */}
+        {/* ================= ROW 1 ================= */}
         <div
           className="
             flex
@@ -106,11 +87,9 @@ export default function MarqueeSection() {
             transform: `translateX(${offset - 200}px)`
           }}
         >
-
-          {row1Gifs.map((src, i) => (
-
+          {row1Loop.map((src, i) => (
             <div
-              key={i}
+              key={`row1-${i}`}
               className="
                 relative
                 w-[420px]
@@ -120,12 +99,11 @@ export default function MarqueeSection() {
                 overflow-hidden
                 border
                 border-[#D4AF37]/20
-                bg-[#071F4B]
+                bg-[#050608]
                 shadow-[0_12px_35px_rgba(0,0,0,0.30)]
                 group
               "
             >
-
               <img
                 src={src}
                 alt="Campaign visual"
@@ -135,6 +113,7 @@ export default function MarqueeSection() {
                   h-full
                   rounded-2xl
                   object-cover
+                  object-top
                   transition-transform
                   duration-700
                   group-hover:scale-105
@@ -142,19 +121,25 @@ export default function MarqueeSection() {
               />
 
               {/* Navy overlay */}
-              <div className="absolute inset-0 bg-[#092B66]/10 group-hover:bg-transparent transition-colors duration-500" />
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-[#092B66]/10
+                  group-hover:bg-transparent
+                  transition-colors
+                  duration-500
+                "
+              />
 
               {/* Gold corner accent */}
               <div className="absolute top-0 left-0 w-12 h-[3px] bg-[#D4AF37]" />
-
             </div>
-
           ))}
-
         </div>
 
 
-        {/* Row 2 - Moves Left */}
+        {/* ================= ROW 2 ================= */}
         <div
           className="
             flex
@@ -166,11 +151,9 @@ export default function MarqueeSection() {
             transform: `translateX(-${offset - 200}px)`
           }}
         >
-
-          {row2Gifs.map((src, i) => (
-
+          {row2Loop.map((src, i) => (
             <div
-              key={i}
+              key={`row2-${i}`}
               className="
                 relative
                 w-[420px]
@@ -185,7 +168,6 @@ export default function MarqueeSection() {
                 group
               "
             >
-
               <img
                 src={src}
                 alt="Campaign visual"
@@ -194,7 +176,7 @@ export default function MarqueeSection() {
                   w-full
                   h-full
                   rounded-2xl
-                  object-cover
+                  object-cover object-top 
                   transition-transform
                   duration-700
                   group-hover:scale-105
@@ -202,19 +184,24 @@ export default function MarqueeSection() {
               />
 
               {/* Navy overlay */}
-              <div className="absolute inset-0 bg-[#092B66]/10 group-hover:bg-transparent transition-colors duration-500" />
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-[#092B66]/10
+                  group-hover:bg-transparent
+                  transition-colors
+                  duration-500
+                "
+              />
 
               {/* Gold corner accent */}
               <div className="absolute top-0 right-0 w-12 h-[3px] bg-[#D4AF37]" />
-
             </div>
-
           ))}
-
         </div>
 
       </div>
-
 
       {/* Bottom gold accent */}
       <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#D4AF37]/60" />

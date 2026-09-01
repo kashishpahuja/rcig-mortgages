@@ -12,7 +12,7 @@ const projects = [
     name: 'Making Housing More Affordable',
     description:
       'I will work with Council to reduce development charges and encourage policies that create a more attainable path to homeownership for families in Caledon.',
-    image: '/Images/bg.webp',
+    image: '/Images/10.webp',
   },
   {
     number: '02',
@@ -20,7 +20,7 @@ const projects = [
     name: 'Smart Growth. Stronger Caledon.',
     description:
       'Caledon needs development policies that protect taxpayers while supporting responsible growth, attracting investment and preparing our community for the future.',
-    image: '/Images/bg.webp',
+    image: '/Images/8.webp',
   },
   {
     number: '03',
@@ -28,7 +28,7 @@ const projects = [
     name: 'A Community That Thrives',
     description:
       'We can create an environment where families can live, people can work, businesses can thrive and investors are welcomed — strengthening Caledon’s economic future.',
-    image: '/Images/bg.webp',
+    image: '/Images/5.webp',
   },
 ];
 

@@ -10,49 +10,49 @@ const priorities = [
     title: 'Responsible Growth',
     description:
       'Advocating for responsible and properly planned growth that keeps infrastructure, neighbourhoods, services, and the long-term needs of Caledon at the centre of every decision.',
-    image: '/Images/bg.webp',
+    image: '/Images/01.webp',
   },
   {
     number: '02',
     title: 'Better Infrastructure',
     description:
       'Working for better roads, infrastructure, transportation, and community services that keep pace with Caledon’s growth and protect our quality of life.',
-    image: '/Images/bg.webp',
+    image: '/Images/2.webp',
   },
   {
     number: '03',
     title: 'Safer Communities',
     description:
       'Building safer, stronger, and more connected communities where residents feel supported, heard, and proud to call Caledon home.',
-    image: '/Images/bg.webp',
+    image: '/Images/02.webp',
   },
   {
     number: '04',
     title: 'Local Businesses',
     description:
       'Supporting local businesses, entrepreneurs, employers, and employment opportunities while creating a strong environment for Caledon’s local economy to thrive.',
-    image: '/Images/bg.webp',
+    image: '/Images/04.webp',
   },
   {
     number: '05',
     title: 'Protect Our Environment',
     description:
       'Protecting Caledon’s farmland, natural environment, and unique character while balancing responsible development with long-term environmental stewardship.',
-    image: '/Images/bg.webp',
+    image: '/Images/03.webp',
   },
   {
     number: '06',
     title: 'Accountable Government',
     description:
       'Promoting financial accountability, transparency, and accessible local government so residents can have confidence in how decisions are made and how every tax dollar is used.',
-    image: '/Images/bg.webp',
+    image: '/Images/5.webp',
   },
   {
     number: '07',
     title: 'Stronger Caledon',
     description:
       'Working collaboratively with residents, community organizations, and local leaders to create a more connected, prosperous, and vibrant future for everyone.',
-    image: '/Images/bg.webp',
+    image: '/Images/7.webp',
   },
 ];
 
@@ -135,7 +135,7 @@ export default function ServicesSection() {
                 fontSize: 'clamp(1rem, 1.7vw, 1.2rem)',
               }}
             >
-              Listening to residents, understanding our community's needs,
+              Listening to residents, understanding our community&apos;s needs,
               and working together toward a stronger Caledon.
             </p>
 
@@ -295,7 +295,7 @@ export default function ServicesSection() {
                   <span
                     className="
                       font-black
-                      text-[#F4F1E8]
+                      text-[#f4f1e896]
                       transition-colors
                       duration-300
                       group-hover:text-[#D52B2B]/50

@@ -50,7 +50,7 @@ export default function HeroSection() {
             <div className="relative">
 
               {/* Subtle gold glow behind portrait */}
-              <div className="absolute inset-x-[-30px] bottom-0 h-[85%] bg-[#D4AF37]/10 blur-[70px] rounded-full" />
+              <div className="absolute -inset-x-7.5 bottom-0 h-[85%] bg-[#D4AF37]/10 blur-[70px] rounded-full" />
 
       <div className=''>
       
