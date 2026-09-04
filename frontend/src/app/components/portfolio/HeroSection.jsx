@@ -103,7 +103,7 @@ export default function HeroSection() {
                 text-[11vw]
                 sm:text-[11vw]
                 md:text-[11vw]
-                lg:text-[11vw]
+                lg:text-[10vw]
                 mt-6
                 sm:mt-4
                 md:-mt-5
