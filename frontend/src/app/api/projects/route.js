@@ -78,3 +78,36 @@ export async function DELETE(request) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
+
+// Add this to src/app/api/projects/route.js
+export async function PUT(request) {
+  try {
+    await connectMongo();
+    const formData = await request.formData();
+    const file = formData.get('image');
+    const projectId = formData.get('projectId');
+
+    if (!file || !projectId) return NextResponse.json({ success: false, error: "Missing file or ID" }, { status: 400 });
+
+    // Save New Image Locally
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const filename = Date.now() + '-' + file.name.replace(/\s+/g, '_');
+    const uploadDir = path.join(process.cwd(), 'public/uploads/projects');
+    await fs.mkdir(uploadDir, { recursive: true });
+    const filePath = path.join(uploadDir, filename);
+    await fs.writeFile(filePath, buffer);
+
+    const imageUrl = `/uploads/projects/${filename}`;
+
+    // Update MongoDB record
+    const updatedProject = await Project.findByIdAndUpdate(
+      projectId,
+      { image: imageUrl },
+      { new: true }
+    );
+
+    return NextResponse.json({ success: true, data: updatedProject });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+  }
+}
