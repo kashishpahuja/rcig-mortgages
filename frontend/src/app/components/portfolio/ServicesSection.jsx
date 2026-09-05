@@ -1,49 +1,76 @@
-// components/portfolio/ServicesSection.jsx
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FadeIn from './FadeIn';
 
+// Default data if the database returns an empty array
+const defaultPriorities = [
+  {
+    number: '01',
+    title: 'Growth Will Pay for Growth',
+    description: 'New development must contribute fairly toward the roads, water, parks, fire services, and community facilities needed to support growth.',
+    image: '/Images/01.webp',
+  },
+  {
+    number: '02',
+    title: 'Infrastructure Before Congestion',
+    description: 'Growth must be coordinated with roads, transit, schools, healthcare, and emergency services so infrastructure keeps pace with development.',
+    image: '/Images/2.webp',
+  },
+  {
+    number: '03',
+    title: 'Jobs Close to Home',
+    description: 'Attract advanced manufacturing, technology, healthcare, tourism, professional services, and clean industry to create more local opportunities.',
+    image: '/Images/02.webp',
+  },
+  {
+    number: '04',
+    title: 'Housing for Every Stage of Life',
+    description: 'Support starter homes, family housing, rentals, seniors’ housing, and appropriate additional residential units for a growing community.',
+    image: '/Images/04.webp',
+  },
+  {
+    number: '05',
+    title: 'Protect Rural Caledon',
+    description: 'Protect farmland, water resources, the Greenbelt, heritage communities, and environmentally sensitive areas while managing responsible growth.',
+    image: '/Images/03.webp',
+  },
+  {
+    number: '06',
+    title: 'Transparent Municipal Government',
+    description: 'Set measurable targets, report publicly on performance, and strengthen safeguards so residents know how decisions are made and how their tax dollars are used.',
+    image: '/Images/5.webp',
+  },
+];
+
 export default function ServicesSection({ prioritiesData = [] }) {
-  // Fallback to default data if the database returns an empty array
-  const displayPriorities = prioritiesData.length > 0 ? prioritiesData : [
-    {
-      number: '01',
-      title: 'Growth Will Pay for Growth',
-      description: 'New development must contribute fairly toward the roads, water, parks, fire services, and community facilities needed to support growth.',
-      image: '/Images/01.webp',
-    },
-    {
-      number: '02',
-      title: 'Infrastructure Before Congestion',
-      description: 'Growth must be coordinated with roads, transit, schools, healthcare, and emergency services so infrastructure keeps pace with development.',
-      image: '/Images/2.webp',
-    },
-    {
-      number: '03',
-      title: 'Jobs Close to Home',
-      description: 'Attract advanced manufacturing, technology, healthcare, tourism, professional services, and clean industry to create more local opportunities.',
-      image: '/Images/02.webp',
-    },
-    {
-      number: '04',
-      title: 'Housing for Every Stage of Life',
-      description: 'Support starter homes, family housing, rentals, seniors’ housing, and appropriate additional residential units for a growing community.',
-      image: '/Images/04.webp',
-    },
-    {
-      number: '05',
-      title: 'Protect Rural Caledon',
-      description: 'Protect farmland, water resources, the Greenbelt, heritage communities, and environmentally sensitive areas while managing responsible growth.',
-      image: '/Images/03.webp',
-    },
-    {
-      number: '06',
-      title: 'Transparent Municipal Government',
-      description: 'Set measurable targets, report publicly on performance, and strengthen safeguards so residents know how decisions are made and how their tax dollars are used.',
-      image: '/Images/5.webp',
-    },
-  ];
+  const [displayPriorities, setDisplayPriorities] = useState(defaultPriorities);
+
+  useEffect(() => {
+    // 1. If data was passed via props from the server, use it.
+    if (prioritiesData && prioritiesData.length > 0) {
+      setDisplayPriorities([...prioritiesData].sort((a, b) => a.number.localeCompare(b.number)));
+      return;
+    }
+
+    // 2. Otherwise, fetch it directly from the backend API
+    const fetchLivePriorities = async () => {
+      try {
+        const res = await fetch('/api/priorities');
+        const result = await res.json();
+        
+        if (result.success && result.data && result.data.length > 0) {
+          // Sort numerically by the 'number' field (01, 02, 03)
+          const sortedData = [...result.data].sort((a, b) => a.number.localeCompare(b.number));
+          setDisplayPriorities(sortedData);
+        }
+      } catch (error) {
+        console.error("Failed to fetch priorities:", error);
+      }
+    };
+
+    fetchLivePriorities();
+  }, [prioritiesData]);
 
   return (
     <section
@@ -447,7 +474,6 @@ export default function ServicesSection({ prioritiesData = [] }) {
     </section>
   );
 }
-
 
 
 // // components/ServicesSection.jsx

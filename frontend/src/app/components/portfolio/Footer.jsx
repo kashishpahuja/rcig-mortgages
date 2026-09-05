@@ -185,7 +185,7 @@ export default function Footer() {
               href="tel:4169853771"
               className="hover:text-[#C62828] transition-colors"
             >
-              416-985-3771
+              +1-416-985-3771
             </a>
 
           </div>

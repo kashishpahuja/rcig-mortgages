@@ -1,4 +1,3 @@
-// components/MarqueeSection.jsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -35,26 +34,15 @@ function useDraggable() {
   return { handlers, dragX, isDragging };
 }
 
-const gifs = [
-  "/Images/5.webp",
-  "/Images/1.webp",
-  "/Images/2.webp",
-  "/Images/3.webp",
-  "/Images/16.webp",
-  "/Images/15.webp",
-  "/Images/14.webp",
-  "/Images/12.webp",
-  "/Images/7.webp",
-  "/Images/8.webp",
-  "/Images/9.webp",
-  "/Images/10.webp",
-  "/Images/11.webp",
-  "/Images/6.webp",
-  "/Images/13.webp",
-  "/Images/4.webp",
+// Default images if database is empty
+const defaultGifs = [
+  "/Images/5.webp", "/Images/1.webp", "/Images/2.webp", "/Images/3.webp",
+  "/Images/16.webp", "/Images/15.webp", "/Images/14.webp", "/Images/12.webp",
+  "/Images/7.webp", "/Images/8.webp", "/Images/9.webp", "/Images/10.webp",
+  "/Images/11.webp", "/Images/6.webp", "/Images/13.webp", "/Images/4.webp",
 ];
 
-export default function MarqueeSection() {
+export default function MarqueeSection({ marqueeData = [] }) {
   const [offset, setOffset] = useState(0);
   const [row1Gifs, setRow1Gifs] = useState([]);
   const [row2Gifs, setRow2Gifs] = useState([]);
@@ -64,16 +52,27 @@ export default function MarqueeSection() {
   const row2Drag = useDraggable();
 
   useEffect(() => {
-    // Shuffle all 10 images
-    const shuffled = [...gifs].sort(() => Math.random() - 0.5);
+    // 1. Determine which images to show (Database data or Default Gifs)
+    let imagesToUse = [];
 
-    // Split into two rows - 5 unique images each
-    setRow1Gifs(shuffled.slice(0, 5));
-    setRow2Gifs(shuffled.slice(5, 10));
+    if (marqueeData && marqueeData.length > 0) {
+      // Sort database images by their 'order' property to match the Admin Panel
+      const sortedData = [...marqueeData].sort((a, b) => (a.order || 0) - (b.order || 0));
+      // Extract just the URLs
+      imagesToUse = sortedData.map(img => img.imageUrl);
+    } else {
+      // Fallback to default array if DB is empty
+      imagesToUse = [...defaultGifs];
+    }
 
+    // 2. Split into two rows WITHOUT shuffling
+    const half = Math.ceil(imagesToUse.length / 2);
+    setRow1Gifs(imagesToUse.slice(0, half));
+    setRow2Gifs(imagesToUse.slice(half));
+
+    // 3. Handle Parallax Scroll
     const handleScroll = () => {
       const section = document.getElementById('marquee-section');
-
       if (!section) return;
 
       const rect = section.getBoundingClientRect();
@@ -90,11 +89,10 @@ export default function MarqueeSection() {
     // Initial position
     handleScroll();
 
-    return () =>
-      window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [marqueeData]); // Re-run if backend data changes
 
-  // Duplicate each row for continuous marquee
+  // Duplicate each row to create the continuous infinite scroll illusion
   const row1Loop = [...row1Gifs, ...row1Gifs, ...row1Gifs];
   const row2Loop = [...row2Gifs, ...row2Gifs, ...row2Gifs];
 

@@ -190,7 +190,7 @@ export default function ProjectsSection({ projectsData = [] }) {
                   >
                     <div className="flex items-start gap-5 sm:gap-7">
                       {/* Number */}
-                      <span
+                      {/* <span
                         className="
                           font-black
                           leading-none
@@ -201,7 +201,7 @@ export default function ProjectsSection({ projectsData = [] }) {
                         }}
                       >
                         {project.number}
-                      </span>
+                      </span> */}
 
                       {/* Title */}
                       <div className="pt-1 sm:pt-2">

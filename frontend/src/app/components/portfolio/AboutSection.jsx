@@ -216,7 +216,7 @@ export default function AboutSection({ aboutData }) {
                 text-[#071B35]
               "
               style={{
-                fontSize: 'clamp(2rem, 9vw, 80px)',
+                fontSize: 'clamp(2rem, 9vw, 70px)',
               }}
             >
               {title}

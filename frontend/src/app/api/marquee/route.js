@@ -85,3 +85,30 @@ export async function DELETE(request) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
+
+// src/app/api/marquee/route.js (Add this at the end of the file)
+
+// PUT: Bulk update the order of images
+export async function PUT(request) {
+  try {
+    await connectMongo();
+    const body = await request.json();
+    const { orderedIds } = body; // Array of IDs in their new order
+
+    if (!orderedIds || !Array.isArray(orderedIds)) {
+      return NextResponse.json({ success: false, error: "Invalid data" }, { status: 400 });
+    }
+
+    // Loop through the IDs and update their order field based on their index in the array
+    const updatePromises = orderedIds.map((id, index) => 
+      Marquee.findByIdAndUpdate(id, { order: index })
+    );
+
+    // Wait for all updates to finish
+    await Promise.all(updatePromises);
+
+    return NextResponse.json({ success: true, message: "Order updated successfully" });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+  }
+}
