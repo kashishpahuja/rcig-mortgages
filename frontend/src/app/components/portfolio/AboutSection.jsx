@@ -22,9 +22,9 @@ export default function AboutSection({ aboutData: initialAboutData }) {
     visionStatement: "Caledon is moving from a primarily rural municipality into one of Ontario’s most important urban-rural communities. We must welcome opportunity without losing the farmland, natural environment, villages and community character that make Caledon special."
   });
 
-  useEffect(() => {
-    // If props weren't passed down from server, fetch live data from the backend
-    if (!initialAboutData) {
+useEffect(() => {
+    // Fetch live data if initial props are missing or completely blank/empty
+    if (!initialAboutData || Object.keys(initialAboutData).length === 0 || !initialAboutData.title) {
       fetch('/api/about')
         .then(res => res.ok ? res.json() : {})
         .then(resData => {
@@ -35,6 +35,20 @@ export default function AboutSection({ aboutData: initialAboutData }) {
         .catch(err => console.error("Failed to load about section data:", err));
     }
   }, [initialAboutData]);
+  
+  // useEffect(() => {
+  //   // If props weren't passed down from server, fetch live data from the backend
+  //   if (!initialAboutData) {
+  //     fetch('/api/about')
+  //       .then(res => res.ok ? res.json() : {})
+  //       .then(resData => {
+  //         if (resData.success && resData.data) {
+  //           setAboutData(prev => ({ ...prev, ...resData.data }));
+  //         }
+  //       })
+  //       .catch(err => console.error("Failed to load about section data:", err));
+  //   }
+  // }, [initialAboutData]);
 
   const {
     slogan,

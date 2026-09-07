@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import FadeIn from './FadeIn';
 
-// Default data if the database returns an empty array
+// Default fallback data if the database returns an empty array
 const defaultPriorities = [
   {
     number: '01',
@@ -44,31 +44,26 @@ const defaultPriorities = [
   },
 ];
 
-export default function ServicesSection({ prioritiesData = [] }) {
-  const [displayPriorities, setDisplayPriorities] = useState(defaultPriorities);
+export default function ServicesSection({ prioritiesData: initialPriorities = [] }) {
+  const [displayPriorities, setDisplayPriorities] = useState(() => {
+    if (initialPriorities && initialPriorities.length > 0) {
+      return [...initialPriorities].sort((a, b) => a.number.localeCompare(b.number));
+    }
+    return defaultPriorities;
+  });
 
   useEffect(() => {
-    if (prioritiesData && prioritiesData.length > 0) {
-      setDisplayPriorities([...prioritiesData].sort((a, b) => a.number.localeCompare(b.number)));
-      return;
-    }
-
-    const fetchLivePriorities = async () => {
-      try {
-        const res = await fetch('/api/priorities');
-        const result = await res.json();
-        
+    // Always fetch fresh data from the API endpoint to bypass build-time caching
+    fetch('/api/priorities')
+      .then(res => res.ok ? res.json() : {})
+      .then(result => {
         if (result.success && result.data && result.data.length > 0) {
           const sortedData = [...result.data].sort((a, b) => a.number.localeCompare(b.number));
           setDisplayPriorities(sortedData);
         }
-      } catch (error) {
-        console.error("Failed to fetch priorities:", error);
-      }
-    };
-
-    fetchLivePriorities();
-  }, [prioritiesData]);
+      })
+      .catch(error => console.error("Failed to fetch live priorities:", error));
+  }, []);
 
   return (
     <section
@@ -466,6 +461,8 @@ export default function ServicesSection({ prioritiesData = [] }) {
     </section>
   );
 }
+
+
 // // components/ServicesSection.jsx
 // 'use client';
 

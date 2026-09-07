@@ -1,8 +1,8 @@
+// components/portfolio/MarqueeSection.jsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
 
-// Custom hook to handle drag/touch logic for each row independently
 function useDraggable() {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -34,7 +34,6 @@ function useDraggable() {
   return { handlers, dragX, isDragging };
 }
 
-// Default images if database is empty
 const defaultGifs = [
   "/Images/5.webp", "/Images/1.webp", "/Images/2.webp", "/Images/3.webp",
   "/Images/16.webp", "/Images/15.webp", "/Images/14.webp", "/Images/12.webp",
@@ -47,52 +46,41 @@ export default function MarqueeSection({ marqueeData = [] }) {
   const [row1Gifs, setRow1Gifs] = useState([]);
   const [row2Gifs, setRow2Gifs] = useState([]);
 
-  // Initialize drag instances for each row
   const row1Drag = useDraggable();
   const row2Drag = useDraggable();
 
   useEffect(() => {
-    // 1. Determine which images to show (Database data or Default Gifs)
     let imagesToUse = [];
 
+    // Safely check if database contains active items
     if (marqueeData && marqueeData.length > 0) {
-      // Sort database images by their 'order' property to match the Admin Panel
       const sortedData = [...marqueeData].sort((a, b) => (a.order || 0) - (b.order || 0));
-      // Extract just the URLs
       imagesToUse = sortedData.map(img => img.imageUrl);
     } else {
-      // Fallback to default array if DB is empty
       imagesToUse = [...defaultGifs];
     }
 
-    // 2. Split into two rows WITHOUT shuffling
     const half = Math.ceil(imagesToUse.length / 2);
     setRow1Gifs(imagesToUse.slice(0, half));
     setRow2Gifs(imagesToUse.slice(half));
 
-    // 3. Handle Parallax Scroll
     const handleScroll = () => {
       const section = document.getElementById('marquee-section');
       if (!section) return;
 
       const rect = section.getBoundingClientRect();
       const sectionTop = window.scrollY + rect.top;
-
-      const currentOffset =
-        (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+      const currentOffset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
 
       setOffset(currentOffset);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Initial position
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [marqueeData]); // Re-run if backend data changes
+  }, [marqueeData]);
 
-  // Duplicate each row to create the continuous infinite scroll illusion
   const row1Loop = [...row1Gifs, ...row1Gifs, ...row1Gifs];
   const row2Loop = [...row2Gifs, ...row2Gifs, ...row2Gifs];
 
@@ -109,13 +97,11 @@ export default function MarqueeSection({ marqueeData = [] }) {
         overflow-x-clip
       "
     >
-
-      {/* Gold top accent */}
       <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#D4AF37]" />
 
       <div className="relative flex flex-col gap-3">
 
-        {/* ================= ROW 1 ================= */}
+        {/* ROW 1 */}
         <div
           {...row1Drag.handlers}
           className={`
@@ -152,7 +138,7 @@ export default function MarqueeSection({ marqueeData = [] }) {
                 src={src}
                 alt="Campaign visual"
                 loading="lazy"
-                draggable={false} // Prevents ghost image dragging
+                draggable={false}
                 className="
                   w-full
                   h-full
@@ -165,7 +151,6 @@ export default function MarqueeSection({ marqueeData = [] }) {
                 "
               />
 
-              {/* Navy overlay */}
               <div
                 className="
                   absolute
@@ -178,14 +163,12 @@ export default function MarqueeSection({ marqueeData = [] }) {
                 "
               />
 
-              {/* Gold corner accent */}
               <div className="absolute top-0 left-0 w-12 h-[3px] bg-[#D4AF37] pointer-events-none" />
             </div>
           ))}
         </div>
 
-
-        {/* ================= ROW 2 ================= */}
+        {/* ROW 2 */}
         <div
           {...row2Drag.handlers}
           className={`
@@ -222,7 +205,7 @@ export default function MarqueeSection({ marqueeData = [] }) {
                 src={src}
                 alt="Campaign visual"
                 loading="lazy"
-                draggable={false} // Prevents ghost image dragging
+                draggable={false}
                 className="
                   w-full
                   h-full
@@ -234,7 +217,6 @@ export default function MarqueeSection({ marqueeData = [] }) {
                 "
               />
 
-              {/* Navy overlay */}
               <div
                 className="
                   absolute
@@ -247,7 +229,6 @@ export default function MarqueeSection({ marqueeData = [] }) {
                 "
               />
 
-              {/* Gold corner accent */}
               <div className="absolute top-0 right-0 w-12 h-[3px] bg-[#D4AF37] pointer-events-none" />
             </div>
           ))}
@@ -255,13 +236,10 @@ export default function MarqueeSection({ marqueeData = [] }) {
 
       </div>
 
-      {/* Bottom gold accent */}
       <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#D4AF37]/60" />
-
     </section>
   );
 }
-
 
 // // components/MarqueeSection.jsx
 // 'use client';

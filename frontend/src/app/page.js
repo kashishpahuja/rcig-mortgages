@@ -13,6 +13,10 @@ import ServicesSection from './components/portfolio/ServicesSection';
 import ProjectsSection from './components/portfolio/ProjectsSection';
 import Footer from './components/portfolio/Footer';
 
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Helper function to serialize MongoDB objects so they can be passed to Client Components safely
 const sanitizeData = (data) => JSON.parse(JSON.stringify(data));
 

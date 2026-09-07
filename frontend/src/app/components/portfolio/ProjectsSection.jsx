@@ -1,42 +1,61 @@
 // components/portfolio/ProjectsSection.jsx
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FadeIn from './FadeIn';
 
-export default function ProjectsSection({ projectsData = [] }) {
+// Fallback default data if the database returns an empty array
+const defaultProjects = [
+  {
+    number: '01',
+    category: 'Highway 413',
+    name: 'Connectivity With Accountability',
+    description: 'Ensure Highway 413 delivers better connectivity and economic opportunity while protecting Caledon’s roads, environment, communities, and taxpayers.',
+    image: '/Images/11.webp',
+  },
+  {
+    number: '02',
+    category: 'Jobs & Prosperity',
+    name: 'Local Jobs. Stronger Economy.',
+    description: 'Support sustainable employment and investment through projects like Choice Caledon Business Park while ensuring growth brings meaningful benefits to the community.',
+    image: '/Images/15.webp',
+  },
+  {
+    number: '03',
+    category: 'Future Communities',
+    name: 'Complete Communities, Not Congestion',
+    description: "Plan Caledon's growing communities with the housing, roads, parks, services, and infrastructure needed to create connected neighbourhoods—not isolated subdivisions.",
+    image: '/Images/14.webp'
+  },
+];
+
+export default function ProjectsSection({ projectsData: initialProjects = [] }) {
   const containerRef = useRef(null);
+  const [displayProjects, setDisplayProjects] = useState(() => {
+    if (initialProjects && initialProjects.length > 0) {
+      return [...initialProjects].sort((a, b) => (a.order || 0) - (b.order || 0));
+    }
+    return defaultProjects;
+  });
+
+  useEffect(() => {
+    // Fetch live data directly from the API endpoint to bypass build-time caching
+    fetch('/api/projects')
+      .then(res => res.ok ? res.json() : {})
+      .then(result => {
+        if (result.success && result.data && result.data.length > 0) {
+          const sortedData = [...result.data].sort((a, b) => (a.order || 0) - (b.order || 0));
+          setDisplayProjects(sortedData);
+        }
+      })
+      .catch(error => console.error("Failed to fetch live projects:", error));
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
-
-  // Fallback to default data if the database returns an empty array
-  const displayProjects = projectsData.length > 0 ? projectsData : [
-    {
-      number: '01',
-      category: 'Highway 413',
-      name: 'Connectivity With Accountability',
-      description: 'Ensure Highway 413 delivers better connectivity and economic opportunity while protecting Caledon’s roads, environment, communities, and taxpayers.',
-      image: '/Images/11.webp',
-    },
-    {
-      number: '02',
-      category: 'Jobs & Prosperity',
-      name: 'Local Jobs. Stronger Economy.',
-      description: 'Support sustainable employment and investment through projects like Choice Caledon Business Park while ensuring growth brings meaningful benefits to the community.',
-      image: '/Images/15.webp',
-    },
-    {
-      number: '03',
-      category: 'Future Communities',
-      name: 'Complete Communities, Not Congestion',
-      description: "Plan Caledon's growing communities with the housing, roads, parks, services, and infrastructure needed to create connected neighbourhoods—not isolated subdivisions.",
-      image: '/Images/14.webp'
-    },
-  ];
 
   return (
     <section
@@ -189,20 +208,6 @@ export default function ProjectsSection({ projectsData = [] }) {
                     "
                   >
                     <div className="flex items-start gap-5 sm:gap-7">
-                      {/* Number */}
-                      {/* <span
-                        className="
-                          font-black
-                          leading-none
-                          text-[#071B35]/15
-                        "
-                        style={{
-                          fontSize: 'clamp(3rem, 7vw, 6rem)',
-                        }}
-                      >
-                        {project.number}
-                      </span> */}
-
                       {/* Title */}
                       <div className="pt-1 sm:pt-2">
                         <span
@@ -373,6 +378,7 @@ export default function ProjectsSection({ projectsData = [] }) {
     </section>
   );
 }
+
 
 // // components/ProjectsSection.jsx
 // 'use client';
