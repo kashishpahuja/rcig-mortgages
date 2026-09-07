@@ -1,27 +1,49 @@
 // components/portfolio/AboutSection.jsx
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FadeIn from './FadeIn';
 import AnimatedText from './AnimatedText';
 import ContactButton from './ContactButton';
 
-export default function AboutSection({ aboutData }) {
-  // Destructure dynamic data with fallbacks to prevent crashes if DB is empty
-  const {
-    slogan = "Experienced Leadership for a Growing Caledon",
-    title = "About",
-    candidateName = "Manjit Singh Bhondhi",
-    biographyParagraphs = [
+export default function AboutSection({ aboutData: initialAboutData }) {
+  const [aboutData, setAboutData] = useState(initialAboutData || {
+    slogan: "Experienced Leadership for a Growing Caledon",
+    title: "About",
+    candidateName: "Manjit Singh Bhondhi",
+    biographyParagraphs: [
       "Manjit Singh Bhondhi is a Caledon resident, Canadian citizen, business leader and community volunteer with more than 30 years of leadership experience and over 25 years in mortgage and financial services.",
       "He established Royal Capital Investment Group in 2014 and previously owned and operated the Brampton Convention Centre.",
       "Manjit serves as a Public Member of the Council of the College of Medical Radiation and Imaging Technologists of Ontario, chairs its Registration Committee and contributes to several governance committees.",
       "He is also the Founder-President of the Rotary Club of Brampton Flower City Centennial and has supported hospital fundraising, business organizations and community initiatives.",
       "He is running for Mayor to bring financial discipline, responsible growth, transparent decision-making and experienced leadership to Caledon."
     ],
-    visionTitle = "My Vision for the Future of Caledon",
-    visionStatement = "Caledon is moving from a primarily rural municipality into one of Ontario’s most important urban-rural communities. We must welcome opportunity without losing the farmland, natural environment, villages and community character that make Caledon special."
-  } = aboutData || {};
+    visionTitle: "My Vision for the Future of Caledon",
+    visionStatement: "Caledon is moving from a primarily rural municipality into one of Ontario’s most important urban-rural communities. We must welcome opportunity without losing the farmland, natural environment, villages and community character that make Caledon special."
+  });
+
+  useEffect(() => {
+    // If props weren't passed down from server, fetch live data from the backend
+    if (!initialAboutData) {
+      fetch('/api/about')
+        .then(res => res.ok ? res.json() : {})
+        .then(resData => {
+          if (resData.success && resData.data) {
+            setAboutData(prev => ({ ...prev, ...resData.data }));
+          }
+        })
+        .catch(err => console.error("Failed to load about section data:", err));
+    }
+  }, [initialAboutData]);
+
+  const {
+    slogan,
+    title,
+    candidateName,
+    biographyParagraphs = [],
+    visionTitle,
+    visionStatement
+  } = aboutData;
 
   return (
     <section

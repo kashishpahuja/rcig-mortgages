@@ -213,7 +213,7 @@ export default function HeroSection({ heroData = null }) {
 
             <div className="campaign-contact mt-6 md:mt-0">
 
-              <ContactButton number={data.contactNumber} />
+              <ContactButton phoneNumber={data.contactNumber} />
 
             </div>
 

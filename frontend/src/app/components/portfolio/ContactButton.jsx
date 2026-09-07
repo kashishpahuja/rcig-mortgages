@@ -3,8 +3,8 @@
 
 import React from 'react';
 
-export default function ContactButton() {
-  const phoneNumber = '14169853771';
+export default function ContactButton({ phoneNumber = '14169853771' }) {
+  const activeNumber = phoneNumber || '14169853771';
 
   const message = encodeURIComponent(
     'Hello Manjit Bhondhi, I would like to get in touch regarding your campaign for Mayor of Caledon.'
@@ -12,7 +12,7 @@ export default function ContactButton() {
 
   return (
     <a
-      href={`https://wa.me/${phoneNumber}?text=${message}`}
+      href={`https://wa.me/${activeNumber}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
       className="rounded-full uppercase tracking-widest text-white font-medium px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base transition-transform active:scale-95 cursor-pointer shadow-lg inline-flex items-center justify-center"

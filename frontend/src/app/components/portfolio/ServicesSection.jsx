@@ -1,3 +1,4 @@
+// components/portfolio/ServicesSection.jsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -47,20 +48,17 @@ export default function ServicesSection({ prioritiesData = [] }) {
   const [displayPriorities, setDisplayPriorities] = useState(defaultPriorities);
 
   useEffect(() => {
-    // 1. If data was passed via props from the server, use it.
     if (prioritiesData && prioritiesData.length > 0) {
       setDisplayPriorities([...prioritiesData].sort((a, b) => a.number.localeCompare(b.number)));
       return;
     }
 
-    // 2. Otherwise, fetch it directly from the backend API
     const fetchLivePriorities = async () => {
       try {
         const res = await fetch('/api/priorities');
         const result = await res.json();
         
         if (result.success && result.data && result.data.length > 0) {
-          // Sort numerically by the 'number' field (01, 02, 03)
           const sortedData = [...result.data].sort((a, b) => a.number.localeCompare(b.number));
           setDisplayPriorities(sortedData);
         }
@@ -229,7 +227,6 @@ export default function ServicesSection({ prioritiesData = [] }) {
                       "
                     />
 
-                    {/* Image Overlay */}
                     <div
                       className="
                         absolute
@@ -241,7 +238,6 @@ export default function ServicesSection({ prioritiesData = [] }) {
                       "
                     />
 
-                    {/* Image Label */}
                     <div
                       className="
                         absolute
@@ -275,7 +271,6 @@ export default function ServicesSection({ prioritiesData = [] }) {
                     </div>
                   </div>
                 </div>
-
 
                 {/* Number + Mobile Title */}
                 <div
@@ -319,7 +314,6 @@ export default function ServicesSection({ prioritiesData = [] }) {
                     {priority.title}
                   </h3>
                 </div>
-
 
                 {/* Content */}
                 <div
@@ -385,7 +379,6 @@ export default function ServicesSection({ prioritiesData = [] }) {
           ))}
         </div>
 
-
         {/* Closing Campaign Statement */}
         <FadeIn y={25} delay={0.2}>
           <div
@@ -437,7 +430,6 @@ export default function ServicesSection({ prioritiesData = [] }) {
 
       </div>
 
-
       {/* Bottom Campaign Stripe */}
       <div
         className="
@@ -474,8 +466,6 @@ export default function ServicesSection({ prioritiesData = [] }) {
     </section>
   );
 }
-
-
 // // components/ServicesSection.jsx
 // 'use client';
 

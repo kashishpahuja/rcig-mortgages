@@ -262,7 +262,7 @@ export default function ProjectsSection({ projectsData = [] }) {
                         className="
                           w-full
                           h-full
-                          object-cover
+                          object-cover object-top
                           rounded-[25px]
                           sm:rounded-[35px]
                         "

@@ -8,7 +8,7 @@ export default function AdminHero() {
     candidateName: "Manjit Bhondhi",
     subtitle: "Candidate for Mayor of Caledon",
     description: "Listening to residents. Supporting local businesses. Building a stronger future for Caledon.",
-    contactNumber: "Contact Campaign"
+    contactNumber: "14169853771"
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -18,7 +18,14 @@ export default function AdminHero() {
     fetch('/api/hero')
       .then(res => res.ok ? res.json() : {})
       .then(data => {
-        if (data.data) setHeroData(prev => ({ ...prev, ...data.data }));
+        if (data.data) {
+          setHeroData(prev => ({
+            candidateName: data.data.candidateName || "Manjit Bhondhi",
+            subtitle: data.data.subtitle || "Candidate for Mayor of Caledon",
+            description: data.data.description || "Listening to residents. Supporting local businesses. Building a stronger future for Caledon.",
+            contactNumber: data.data.contactNumber || "14169853771"
+          }));
+        }
         setLoading(false);
       })
       .catch(err => {
@@ -116,12 +123,13 @@ export default function AdminHero() {
             </div>
           </div>
 
-          {/* Contact Button Label/Number Settings */}
+          {/* Contact Phone Number Settings */}
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] text-[#D4AF37] uppercase tracking-widest block mb-1">Contact Button Text / Number</label>
+            <label className="text-[10px] text-[#D4AF37] uppercase tracking-widest block mb-1">WhatsApp Phone Number (e.g., 14169853771)</label>
             <input 
               value={heroData.contactNumber}
               onChange={e => setHeroData({ ...heroData, contactNumber: e.target.value })}
+              placeholder="14169853771"
               className={`max-w-xs font-bold text-sm ${inputClass}`}
             />
           </div>
