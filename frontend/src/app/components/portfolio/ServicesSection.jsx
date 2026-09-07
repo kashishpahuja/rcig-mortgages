@@ -215,7 +215,7 @@ export default function ServicesSection({ prioritiesData: initialPriorities = []
                       className="
                         w-full
                         h-full
-                        object-cover
+                        object-cover object-top
                         transition-transform
                         duration-700
                         group-hover:scale-105
