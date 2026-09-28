@@ -137,8 +137,8 @@ export default function HeroSection({ heroData = null }) {
     text-white
   "
 >
-  Saini Manjit Bhondhi 
-  {/* {data.candidateName} */}
+  {/* Saini Manjit Bhondhi  */}
+  {data.candidateName}
 </h1>
 {/* 
             <h1
