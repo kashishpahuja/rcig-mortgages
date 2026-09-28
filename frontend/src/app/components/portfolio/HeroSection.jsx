@@ -7,7 +7,7 @@ import ContactButton from './ContactButton';
 
 export default function HeroSection({ heroData = null }) {
   const [data, setData] = useState({
-    candidateName: heroData?.candidateName || "Manjit Bhondhi",
+    candidateName: heroData?.candidateName || "Saini Manjit Bhondhi",
     subtitle: heroData?.subtitle || "Candidate for Mayor of Caledon",
     description: heroData?.description || "Listening to residents. Supporting local businesses. Building a stronger future for Caledon.",
     contactNumber: heroData?.contactNumber || ""
@@ -21,7 +21,7 @@ export default function HeroSection({ heroData = null }) {
         .then(resData => {
           if (resData.success && resData.data) {
             setData({
-              candidateName: resData.data.candidateName || "Manjit Bhondhi",
+              candidateName: resData.data.candidateName || "Saini Manjit Bhondhi",
               subtitle: resData.data.subtitle || "Candidate for Mayor of Caledon",
               description: resData.data.description || "Listening to residents. Supporting local businesses. Building a stronger future for Caledon.",
               contactNumber: resData.data.contactNumber || ""
@@ -116,7 +116,31 @@ export default function HeroSection({ heroData = null }) {
           > <div className="overflow-hidden w-full ">
 
           <FadeIn delay={0.15} y={40}>
-
+            <h1
+  className="
+    hero-heading
+    font-black
+    uppercase
+    tracking-[-0.04em]
+    leading-none
+    break-words
+    w-full
+    max-w-full
+    text-[12vw]
+    sm:text-[12vw]
+    md:text-[8vw]
+    lg:text-[6vw]
+    mt-6
+    
+    
+    text-center
+    text-white
+  "
+>
+  Saini Manjit Bhondhi 
+  {/* {data.candidateName} */}
+</h1>
+{/* 
             <h1
               className="
                 hero-heading
@@ -140,7 +164,7 @@ export default function HeroSection({ heroData = null }) {
               "
             >
               {data.candidateName}
-            </h1>
+            </h1> */}
 
           </FadeIn>
 
