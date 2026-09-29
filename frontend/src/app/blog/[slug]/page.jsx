@@ -182,7 +182,7 @@ export default async function PostPage({ params }) {
               post.featuredImageAlt ||
               post.title
             }
-            className="w-full aspect-video object-cover rounded-2xl shadow-lg"
+            className="w-full aspect-video object-cover object-top rounded-2xl shadow-lg"
           />
 
           {post.featuredImageCaption && (
