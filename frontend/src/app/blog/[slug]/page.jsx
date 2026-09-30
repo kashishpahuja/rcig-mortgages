@@ -95,7 +95,8 @@ export default async function PostPage({ params }) {
     post.author?.image || "";
 
   return (
-    <div className="w-full bg-[#FBFCFB] min-h-screen font-sans">
+    <div className="w-full         bg-[#F4F1E8]
+        text-[#071B35] min-h-screen font-sans">
 
       {/* ================= COVER ================= */}
       <div className="w-full bg-[#071B35]">

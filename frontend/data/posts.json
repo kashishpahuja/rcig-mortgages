@@ -87,7 +87,7 @@
     },
     "status": "published",
     "publishedAt": "2026-09-29T08:05:37.044Z",
-    "updatedAt": "2026-09-29T08:05:37.044Z",
+    "updatedAt": "2026-09-30T10:20:26.291Z",
     "social": {
       "ogTitle": "Understanding Local Community Priorities in Caledon",
       "ogDescription": "A look at the local topics and community priorities shaping conversations across Caledon.",
@@ -170,7 +170,7 @@
     },
     "status": "published",
     "publishedAt": "2026-09-29T10:21:41.110Z",
-    "updatedAt": "2026-09-29T10:21:41.110Z",
+    "updatedAt": "2026-09-30T10:20:33.852Z",
     "social": {
       "ogTitle": "",
       "ogDescription": "",
@@ -180,7 +180,7 @@
       "twitterImage": ""
     },
     "readingTime": "1 min read",
-    "featured": true,
+    "featured": false,
     "allowIndexing": true,
     "allowFollowing": true
   },

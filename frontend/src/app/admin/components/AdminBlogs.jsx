@@ -14,9 +14,7 @@ const emptyForm = {
   title: '',
   slug: '',
   excerpt: '',
-
   content: [],
-
   featuredImage: '',
   featuredImageAlt: '',
   featuredImageCaption: '',
@@ -1076,7 +1074,7 @@ export default function AdminBlogs() {
                   </h4>
 
                   {/* Featured */}
-                  <label className="flex items-start gap-3 cursor-pointer">
+                  {/* <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={
@@ -1101,7 +1099,7 @@ export default function AdminBlogs() {
                         featured post.
                       </span>
                     </span>
-                  </label>
+                  </label> */}
 
                   {/* Indexing */}
                   <label className="flex items-start gap-3 cursor-pointer">

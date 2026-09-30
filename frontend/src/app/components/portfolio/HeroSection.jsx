@@ -233,15 +233,15 @@ export default function HeroSection({ heroData = null }) {
 
 
           {/* Contact Button */}
-          <FadeIn delay={0.5} y={20}>
+          {/* <FadeIn delay={0.5} y={20}> */}
 
-            <div className="campaign-contact mt-6 md:mt-0">
+            {/* <div className="campaign-contact mt-6 md:mt-0">
 
               <ContactButton phoneNumber={data.contactNumber} />
 
-            </div>
+            </div> */}
 
-          </FadeIn>
+          {/* </FadeIn> */}
 
         </div>
 

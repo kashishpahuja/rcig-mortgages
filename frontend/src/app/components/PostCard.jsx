@@ -11,19 +11,19 @@ export default function PostCard({ post }) {
   const date = post.publishedAt || post.updatedAt;
 
   return (
-    <article className="group bg-white border border-[#E3E8E4] rounded-2xl overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow">
+    <article className="group grid md:grid-cols-2 gap-0  bg-white border border-[#E3E8E4] rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
       
       {/* Image */}
       <Link
         href={`/blog/${post.slug}`}
-        className="block aspect-[16/9] bg-[#E3E8E4] overflow-hidden"
+        className="block aspect-video bg-[#E3E8E4] overflow-hidden"
       >
         {image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={image}
             alt={imageAlt}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-[#123A2E]/30 font-serif">
