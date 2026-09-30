@@ -393,10 +393,10 @@ export default function GlobalActionButtons() {
               <div className="bg-emerald-900/50 border border-emerald-500/50 p-6 rounded-xl text-center space-y-3">
                 <h4 className="text-lg font-bold text-emerald-300">Donation Details Received!</h4>
                 <p className="text-sm text-gray-200">
-                  Please complete your e-Transfer to <span className="text-[#D4AF37] font-bold">kashish01.digitalpaaji@gmail.com</span>.
+                  Please complete your e-Transfer to <span className="text-[#D4AF37] font-bold">Manjit4Caledon@gmail.com</span>.
                 </p>
                 <div className="p-3 bg-[#0b3374] border border-[#D4AF37]/30 rounded-lg text-xs text-left">
-                  <p className="text-gray-300 mb-1"><strong>Recipient Email:</strong> kashish01.digitalpaaji@gmail.com</p>
+                  <p className="text-gray-300 mb-1"><strong>Recipient Email:</strong> Manjit4Caledon@gmail.com</p>
                   <p className="text-gray-300"><strong>Alternative:</strong> Manjit4Caledon@gmail.com</p>
                 </div>
                 <button
@@ -519,7 +519,7 @@ export default function GlobalActionButtons() {
 
                 <div className="p-3 bg-[#0b3374]/80 border border-[#D4AF37]/30 rounded-xl text-xs text-gray-300">
                   <p className="font-semibold text-[#D4AF37] mb-0.5">Payment Instructions:</p>
-                  <p>Send e-Transfer directly to: <strong className="text-white select-all">kashish01.digitalpaaji@gmail.com</strong></p>
+                  <p>Send e-Transfer directly to: <strong className="text-white select-all">Manjit4Caledon@gmail.com</strong></p>
                 </div>
 
                 <button
@@ -533,7 +533,7 @@ export default function GlobalActionButtons() {
                       <span>Processing...</span>
                     </>
                   ) : (
-                    <span>Initiate Email Transfer Pledge</span>
+                    <span>Initiate Email Transfer Request</span>
                   )}
                 </button>
               </form>
