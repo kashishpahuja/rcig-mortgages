@@ -18,7 +18,7 @@ export default function GlobalActionButtons() {
   const [errorMessage, setErrorMessage] = useState('');
 
   // Donation state
-  const [donationAmount, setDonationAmount] = useState('100');
+  const [donationAmount, setDonationAmount] = useState('500');
   const [customAmount, setCustomAmount] = useState('');
   const [donorData, setDonorData] = useState({
     name: '',
@@ -418,7 +418,7 @@ export default function GlobalActionButtons() {
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-[#D4AF37] mb-2">Select Contribution Amount</label>
                   <div className="grid grid-cols-4 gap-2 mb-3">
-                    {['50', '100', '250', '500'].map((amt) => (
+                    {['250', '500', '1000', '2200'].map((amt) => (
                       <button
                         key={amt}
                         type="button"
