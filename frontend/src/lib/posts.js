@@ -171,7 +171,14 @@ export async function getAllPosts({ includeDrafts = false } = {}) {
   const posts = await readAll();
   return posts
     .filter((p) => includeDrafts || p.status === "published")
-    .sort((a, b) => new Date(b.publishedAt || b.updatedAt) - new Date(a.publishedAt || a.updatedAt));
+    .sort((a, b) =>{
+ const dateA = new Date(a.updatedAt || a.publishedAt || 0);
+      const dateB = new Date(b.updatedAt || b.publishedAt || 0);
+
+      return dateB - dateA;
+    //  new Date(b.publishedAt || b.updatedAt) - new Date(a.publishedAt || a.updatedAt));
+     
+    })
 }
 
 export async function getFeaturedPosts({ includeDrafts = false } = {}) {
