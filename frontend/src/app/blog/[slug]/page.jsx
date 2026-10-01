@@ -174,7 +174,7 @@ export default async function PostPage({ params }) {
 
       {/* ================= FEATURED IMAGE ================= */}
       {post.featuredImage && (
-        <figure className="max-w-4xl mx-auto px-5 sm:px-8 -mt-6 mb-10">
+        <figure className="max-w-xl mx-auto px-5 sm:px-8 -mt-6 mb-10">
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -183,7 +183,7 @@ export default async function PostPage({ params }) {
               post.featuredImageAlt ||
               post.title
             }
-            className="w-full aspect-video object-cover object-top rounded-2xl shadow-lg"
+            className="w-full aspect- object-cover object-top rounded-2xl shadow-lg"
           />
 
           {post.featuredImageCaption && (
